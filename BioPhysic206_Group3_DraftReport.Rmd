@@ -1,0 +1,320 @@
+---
+title: "Biophysics 206 1st Submission"
+author:
+- "Yingxiao Shi (TK), Ruitong Li"
+date: "Due: Nov 24th (Wednesday)"
+mainfont: Arial
+fontsize: 12
+geometry: margin=0.85in,letterpaper
+bibliography: ["one.bib"]
+csl: acta.csl
+link-citations: true
+output:
+  pdf_document: 
+    extra_dependencies: ["graphicx", "amsmath","amssymb","amsthm","hyperref","multicol","geometry","bm","float"]
+    latex_engine: lualatex
+    toc: true
+    toc_depth: 3
+header-includes: 
+- \usepackage{graphicx}
+- \usepackage{float}     
+urlcolor: blue
+---
+\newcommand{\noin}{\noindent }   
+\newcommand{\vdj}{\textnormal{VDJ}}
+\bigskip
+
+\pagebreak
+
+ 
+## Abstract 
+
+Target therapy such as BRAF and MEK inhibitors (BRAFi/MEKi) and immunotherapy has shown efficacy in treating BRAF-mutant melanoma, only a subset of patients maintain durable response. The preferable choice or the sequence of the treatments to BRAF-mutant melanoma remains unclear. The guiding question of this report is that wheather patients with prior BRAFi/MEKi targeted therapy treatment could benefit from immunotherapy given that BRAFi/MEKi can reverse immunosuppressive microenvironment to a more active form. To address this question, we compared the T cells fraction of tumor samples before and after the BRAFi/MEKi with the expectation that the T cells fraction would increase after the treatment. Furthermore, we compare the patients with prior BRAFi/MEKi (MAPKi) therapy response to the ones without. Although we didn’t observe the significant change of TCF before and after the BRAFi/MEKi target therapy, our results suggest that patients with prior BRAFi/MEKi targeted treatment has poor response to immunotherapy if they progressed from the targeted therapy.
+
+## Introduction 
+
+Melanoma arises from the uncontrolled proliferation of melanocytes, the melanin-synthesizing cells responsible for pigmentation and photoprotection in the skin, eye, mucosal epithelia, meninges. Among adult skin cancers, melanoma is the fifth most common and the deadliest disease [1]. Patients with localized or early-stage melanoma can be treated successfully by resection [2]. However, treating patients with advanced-stage melanoma that has metastasized remains challenging [3]. Until 2002, *BRAF* gene mutation, with V600E being the most common mutation, was identified in approximately 50% of patients with metastatic melanoma [4] [5]. With the growing understanding of how *BRAF* mutation is involved in melanoma, the treatment of metastatic melanoma has undergone a dramatic transformation over the past decades as mutant BRAF inhibitors (BRAFi) as well as its downstream target MEK inhibitors (MEKi) [6]. Moreover, immune-checkpoint blockade (ICB) has also demonstrated efficacy in treating metastatic melanomas [7]. While BRAFi/MEKi targeted therapy and ICB revolutionized the treatments to patients with *BRAF*-mutant metastatic melanoma, the preferable choice or the sequence of the treatments remains unclear [8]. Compelling evidence indicates that oncogenic BRAF, in addition to driving melanoma tumorigenesis, contributes to an immunosuppressive phenotype through (1) secretion of inhibitory cytokines (e.g., IL-6) or membrane expression of co-inhibitory molecules such as (e.g., PD-L1 or PD-L2); (2) recruiting inhibitory immune cells (e.g., regulatory T cells, myeloid-derived suppressor cells, tumor-associated macrophages)[]. Interestingly, growing evidence suggests that, besides the effect on the biological targets and pathway, the therapeutic efficacy of BRAFi and MEKi may also rely on additional factors such as the increased immunogenicity in the environment against tumor cells. Clinical study of pre- and on- BRAFi alone or BRAFi/MEKi tumor biopsies from a small set of patients with BRAF-mutant metastatic melanoma (n = 16) showed both treatments are associated with increased expression of melanoma antigens (e.g., MAPT, TYRP1, TYRP2, and Gp100) and recruitment of CD8+ T cells as well as the reduction of CD4 T cells. However, whether those patients benefit from immunotherapy is still unknown. Moreover, the immune microenvironment, such as tumor-infiltrating lymphocytes (TILs) are critical for prognostic and predict response to ICB. 
+
+\medskip
+
+However, the measurement of TILs is limited due to the shortage of RNA-seq data. As one of the commonly collected data, the whole exon sequencing (WES) analysis of tumors largely benefits us in identifying mutations, and copy number alterations correlated with tumor progression, but with little knowledge of the factors associated with the immune microenvironment. Yet, a recently developed algorithm, ExTRECT, allows us to estimate TILs from WES samples using a signal from T cell receptor excision circle (TREC) losing during V(D)J recombination of the T cell receptor-a gene (*TCRA*), which allow us to reinvestigate TILs fractions in the tumors with WES and coolreated that with treatment outcome. Thus, we hypothesize that: (1) Treatment with BRAF inhibition enhances TILs in the tumor and a more favorable tumor microenvironment; (2) The patients with prior BRAFi/MEKi treatment have better response to ICB. To Test the first part of our hypothesis,  we will use a cohort of 45 patients with BRAF metastatic melanoma before and after BRAFi/MEKi targeted therapy, we hypothesize that with the BRAFi/MEKi targeted therapy, we expect to observe an increased number of TCF in the post-treatment. Furthermore, we hypothesize that patients with prior treatment would have a better response in ICB. Although our preliminary data suggests that there is no significant increase of TCF after BRAFi/MEKi treatment in patients with BRAF-metastatic melanoma, further analysis suggested that patients with BRAFi/MEKi prior treatment have poor response to ICB. There are more parameters that should be involved in the analysis before we draw conclusions.
+
+\pagebreak
+
+## Results 
+
+**Validation of TCF with RNAseq-based algorithms**: Within a combined cohort of 104 patients with both WES and RNA-seq data available on tumor biopsy samples, reasonable correlations (Pearson's rho) between TCFs estimated by ExTRECT and estimated CD8+ T cell content based on RNA-seq were observed (Figure 1, EPIC: $\rho = 0.4$, MCP-counter: $\rho = 0.33$, quanTIseq:  $\rho = 0.31$, CIBERSORT-ABS:$\rho = 0.31$).
+
+**Comparison of TCFs between pre- and post- BRAFi therapy**: With the validation of estimated TCFs from WES using ExTRECT, we computed TCFs from matched tumor samples from 28 patients pre- and post- BRAFi treatment. Adjustment of TCFs based on purity and copy number around TCRA locus did not change the bimodality observed in $\Delta$TCF (post versus pre treatment) and this biomdality did not suggest to associate with response to BRAFi target therapy (Figure 2, Non-responded: N=8 for Stable Disease or Progressed Disease, Responded: N=20 for Partial Response).
+
+**Prognostic value of prior MAPKi therapy to patient survival under ICB**: With the combined melanoma cohort under immunotherapy (N = 92 with anti-CTLA-4 ICB, N = 82 with anti-PD1 ICB), patients with prior MAPKi therapy (N = 25) suggest to have significantly worse OS but the association with PFS is only marginally significant (Figure 3, two sided KM log rank test, p=0.011 and p=0.142 respectively). After adjusting for potential confounding factors (age, sex, immmune microenvironment measured in adjusted TCFs, mututation load and patient cohort) with multivariate cox proportional model, prior MAPKi is found to significantly correlate with worse PFS and OS (p=0.03 and p<0.001 respectively).
+
+**Features of immune microenvironment associated with patient prior MAPKi treatment**: To further investigate the potential alterations in tumor immune microenvironment, which may help to explain the detected association between prior MAPKi therapy and patient survival under ICB, we examined the stratified distribution of multiple infiltrated immune cell estimations given by xcell and also the RNA-seq expression of important immune molecular markers based on their prior MAPKi therapy. No significant differences have been found to associate with prior MAPKi therapy among above selected features, but myeloid dendritic cell and CD4+ T helper 2 cell did suggest a potentially increased level in patients with prior MAPKi treatment. 
+
+\pagebreak
+
+```{r setup, include=F}
+###########################
+# DEFAULT SETTINGS
+###########################
+knitr::opts_chunk$set(message = FALSE)
+knitr::opts_chunk$set(warning = FALSE)
+knitr::opts_chunk$set(echo=F) 
+knitr::opts_chunk$set(fig.pos='H')
+###########################
+# LIBRARIES
+###########################
+pagebreak <- function() {
+  if(knitr::is_latex_output())
+    return("\\newpage")
+  else
+    return('<div style="page-break-before: always;" />')
+}
+pacman::p_load(glue,ggplot2,RColorBrewer,ggpubr,dplyr,forcats,survival,jskm)
+import::from(magrittr,"%<>%","set_colnames","set_rownames","set_names")
+import::from(tibble,"column_to_rownames","rownames_to_column")
+import::from(tidyr,"spread","unite","gather","separate")
+folderP <- "~/ZoneIn/2021-11-24_BioPhy_Draft/Progress/FullDraft"
+```
+
+```{r, eval=F}
+suvd <- readRDS(glue("{folderP}/Data/Figure3_SurvivalComb1519D.rds"))
+OS_Coxfit <- coxph(Surv(OS, dead) ~ as.factor(pretrt) + age + as.factor(sex) + ADJ_TCF + nonsynonymous + as.factor(PubYr), data = suvd)
+PFS_Coxfit <- coxph(Surv(PFS, progression) ~ as.factor(pretrt) + age + as.factor(sex) + ADJ_TCF + nonsynonymous + as.factor(PubYr), data = suvd)
+KM_PFSFit <- survfit(Surv(PFS, progression) ~ as.factor(pretrt),data=suvd)
+invisible(pKM_PFS <- jskm(KM_PFSFit, table = T, pval = T, 
+     label.nrisk = "No. at risk", 
+     size.label.nrisk = 7, 
+     xlabs = "Time (Days)", 
+     ylabs = "Survival", 
+     main = "PFS",
+     ystratalabs = c("Yes","No"),
+     ystrataname = "Pre MAPKi Therapy",
+     marks = F, timeby = 180, 
+     xlims = c(0, 1700), ylims = c(0, 1), 
+     showpercent = F,pval.coord =c(1400,0.5)))
+KM_OSFit <- survfit(Surv(OS, dead) ~ as.factor(pretrt),data=suvd)
+invisible(pKM_OS <- jskm(KM_OSFit, table = T, pval = T, 
+     label.nrisk = "No. at risk", 
+     size.label.nrisk = 7, 
+     xlabs = "Time (Days)", 
+     ylabs = "Survival", 
+     main = "OS",
+     ystratalabs = c("Yes","No"),
+     ystrataname = "Pre MAPKi Therapy",
+     marks = F, timeby = 180, 
+     xlims = c(0, 1700), ylims = c(0, 1), 
+     showpercent = F,pval.coord =c(1400,0.5)))
+saveRDS(pKM_PFS,glue("{folderP}/Data/Figure3_SurvivalPre_KMp_PFS.rds"))
+saveRDS(pKM_OS,glue("{folderP}/Data/Figure3_SurvivalPre_KMp_OS.rds"))
+```
+
+```{r Figure1,out.width="100%",dpi=1200,fig.width=3,fig.height=3.5,fig.align="center",fig.cap="Correlation between ExTRECT and other RNA-seq based methods"}
+combInfil <- readRDS(glue("{folderP}/Data/Figure1_combInfil.rds"))
+cdk8Names <- grep("T cell CD8\\+\\_",colnames(combInfil),value=T)
+apply(combInfil[,-1],2,as.numeric)%>%
+  cor(.,method = "pearson")%>%
+  .[cdk8Names,"ADJ_TCF"]%>%
+  as.data.frame()%>%
+  set_colnames("Pearson")%>%
+  rownames_to_column("cellEst")%>%
+  mutate(Pearson = as.numeric(Pearson))%>%
+  mutate(cellEst = gsub(".*\\_","",cellEst))%>%
+  mutate(cellEst =fct_reorder(cellEst,Pearson))%>%
+  mutate(adjTCF = "ExTRECT")%>%
+  ggplot(.,aes(x =adjTCF, y = cellEst, fill = Pearson)) +
+  geom_tile(color = "gray50",size=rel(0.01))+
+  scale_fill_gradientn(colors = hcl.colors(30, "reds",rev=T)) +
+  labs(x="",y="")+
+  theme(
+    axis.ticks=element_blank(),
+    panel.background=element_blank(),
+    panel.border=element_blank(),
+    axis.text = element_text(face="bold",size=rel(0.5)))
+```
+
+```{r Figure2,out.width="100%",dpi=1200,fig.width=8,fig.height=3.5,fig.align="center",fig.cap="Adjusted TCFs for patients (n= 28) pre- and post- BRAFi treatment"}
+Combined_ExTRECT <- readRDS(glue("{folderP}/Data/Figure2_Combined_ExTRECT.rds"))
+PrePost <- Combined_ExTRECT%>%
+  filter(PubYr=="Y2014")%>%
+  select(PatientID,ID,ADJ_TCF)%>%
+  mutate(condition = gsub(".*\\.","",ID))%>%
+  mutate(condition=case_when(condition=="BRAF"~"Post",TRUE~"Pre"))%>%
+  mutate(condition = factor(condition,levels = c("Pre","Post")))
+Clin14 <- openxlsx::read.xlsx(glue("{folderP}/Data/ClinicalChar_2014.xlsx"))[-c(1),1:8]%>%
+  set_colnames(c("PatientID","Gender","StartAge","Medication",
+                 "EarlyResistance","TherapyDuration",
+                 "Response","NormalTissue"))
+CliniTCF <- Clin14%>%
+  mutate(PatientID = gsub(" ","",PatientID))%>%
+  mutate(Response = as.character(Response))%>%
+  inner_join(PrePost,by="PatientID")%>%
+  mutate(Response = gsub(" ","",Response))
+pbox1 <- ggplot(CliniTCF%>%filter(Response %in% c('SD',"PD")), aes(x=condition, y= ADJ_TCF,fill=condition)) +
+  geom_boxplot()+
+   scale_fill_manual(values=c( "#E69F00", "#56B4E9"))+
+  theme(plot.title = element_text(color='black', hjust = 0.5),
+        panel.background = element_blank(),
+        panel.border = element_rect(color = "black", size = 1, fill = NA),
+        panel.grid = element_blank(),
+        axis.text = element_text(color='black'),
+        legend.key = element_rect(fill = NA),
+        legend.position ="none")+
+  labs(x=NULL,y="Adjusted TCF",title = "Non-Responded")+
+  stat_compare_means(label.x = 0.8,label.y = 0.51,size=rel(2.8))
+pscatter1 <- ggplot(CliniTCF%>%filter(Response %in% c('SD',"PD")), aes(x=condition, y= ADJ_TCF,group=PatientID)) +
+  geom_point(aes(color=condition)) +
+  geom_line()+
+  scale_color_manual(values=c( "#E69F00", "#56B4E9"))+
+  theme(plot.title = element_text(color='black', hjust = 0.5),
+        panel.background = element_blank(),
+        panel.border = element_rect(color = "black", size = 1, fill = NA),
+        panel.grid = element_blank(),
+        axis.text = element_text(color='black'),
+        legend.key = element_rect(fill = NA),
+        legend.position ="none")+
+  labs(x=NULL,y="Adjusted TCF")
+
+
+pbox2 <- ggplot(CliniTCF%>%filter(Response %in% c("PR")), aes(x=condition, y= ADJ_TCF,fill=condition)) +
+  geom_boxplot()+
+  scale_fill_manual(values=c( "#E69F00", "#56B4E9"))+
+  theme(plot.title = element_text(color='black', hjust = 0.5),
+        panel.background = element_blank(),
+        panel.border = element_rect(color = "black", size = 1, fill = NA),
+        panel.grid = element_blank(),
+        axis.text = element_text(color='black'),
+        legend.key = element_rect(fill = NA),
+        legend.position ="none")+
+  labs(x=NULL,y="Adjusted TCF",title = "Responded")+
+  stat_compare_means(label.x = 0.8,label.y = 0.54,size=rel(2.8))
+pscatter2 <- ggplot(CliniTCF%>%filter(Response %in% c("PR")), aes(x=condition, y= ADJ_TCF,group=PatientID)) +
+  geom_point(aes(color=condition)) +
+  scale_color_manual(values=c( "#E69F00", "#56B4E9"))+
+  geom_line()+
+  theme(plot.title = element_text(color='black', hjust = 0.5),
+        panel.background = element_blank(),
+        panel.border = element_rect(color = "black", size = 1, fill = NA),
+        panel.grid = element_blank(),
+        axis.text = element_text(color='black'),
+        legend.key = element_rect(fill = NA),
+        legend.position ="none")+
+  labs(x=NULL,y="Adjusted TCF")
+
+p3 <- ggplot(CliniTCF, aes(x=ADJ_TCF))+
+  geom_histogram(position="identity", alpha=0.7,fill="#E69F00",color = "#E69F00",binwidth = 0.01)+
+  theme(panel.grid = element_blank(),
+        panel.background = element_blank(),
+        axis.text = element_text(color='black',family = "Helvetica"),
+        axis.title = element_text(color='black',family = "Helvetica"),
+        panel.border = element_rect(color = "black", size = 1, fill = NA))+
+  labs(x="Adjusted TCF",y="Frequency")
+p1 <- ggarrange(pbox1,pbox2,nrow = 1)
+p2 <- ggarrange(pscatter1,pscatter2,nrow = 1)
+pPrePost <- ggarrange(p1,p2,
+                      ncol = 1,heights = c(1.5,1))
+ggarrange(p3,pPrePost,nrow=1,widths = c(1,1.5))
+```
+
+```{r Figure3,out.width="100%",dpi=1200,fig.width=8,fig.height=9.5,fig.align="center",fig.cap="Survival (PFS and OS as indicated) stratified by with versus without prior MAPKi treatment in a melanoma combined cohort (N= 174)"}
+suvd <- readRDS(glue("{folderP}/Data/Figure3_SurvivalComb1519D.rds"))
+OS_Coxfit <- coxph(Surv(OS, dead) ~ as.factor(pretrt) + age + as.factor(sex) + ADJ_TCF + nonsynonymous + as.factor(PubYr), data = suvd)
+PFS_Coxfit <- coxph(Surv(PFS, progression) ~ as.factor(pretrt) + age + as.factor(sex) + ADJ_TCF + nonsynonymous + as.factor(PubYr), data = suvd)
+pKM_PFS <- readRDS(glue("{folderP}/Data/Figure3_SurvivalPre_KMp_PFS.rds"))
+pKM_OS <- readRDS(glue("{folderP}/Data/Figure3_SurvivalPre_KMp_OS.rds"))
+pHIST <- ggplot(Combined_ExTRECT%>%
+         filter(PubYr!="Y2014"), aes(x=ADJ_TCF))+
+  geom_histogram(position="identity", alpha=0.8,fill="#E69F00",color = "#E69F00",binwidth = 0.01)+
+  facet_wrap(PubYr~.,ncol = 1,scales = "free")+
+  theme(panel.grid = element_blank(),
+        panel.background = element_blank(),
+        axis.text = element_text(color='black',family = "Helvetica"),
+        axis.title = element_text(color='black',family = "Helvetica"),
+        panel.border = element_rect(color = "black", size = 1, fill = NA))+
+  labs(x="Adjusted TCF",y="Frequency")
+ggarrange(pHIST,ggarrange(pKM_PFS,pKM_OS,ncol=1),nrow=1,widths = c(1,1.8))
+```
+
+```{r Figure4,out.width="100%",dpi=1200,fig.width=8.5,fig.height=10,fig.align="center",fig.cap="Immune microenvironment associated with Prior MAPKi treatment"}
+RNAseqC1519D <- readRDS(glue("{folderP}/Data/Figure4_RNAseqC1519D.rds"))
+cType <- RNAseqC1519D%>%
+  dplyr::select(-Entity)%>%
+  gather(features,value,-PatientID,-preTRT)%>%
+  filter(grepl("XCELL",features))%>%
+  mutate(features = gsub("\\_XCELL","",features)%>%gsub("\\(.*","",.))%>%
+  mutate(value = as.numeric(value))%>%
+  ggplot(., aes(x=preTRT, y=value, fill=preTRT)) +
+  geom_boxplot()+
+  facet_wrap(~features,nrow = 2,scales="free")+
+  theme(plot.title = element_text(color='black', hjust = 0.5),
+        panel.background = element_blank(),
+        panel.border = element_rect(color = "black", size = 1, fill = NA),
+        panel.grid = element_blank(),
+        axis.text = element_text(color='black'),
+        axis.title=element_blank(),
+        legend.key = element_rect(fill = NA),legend.position = "none")+
+  labs(title="(a) Estimated cell fraction")
+mMarker <- RNAseqC1519D%>%
+  dplyr::select(-Entity)%>%
+  gather(features,value,-PatientID,-preTRT)%>%
+  filter(!grepl("XCELL",features))%>%
+  mutate(features = gsub("\\_XCELL","",features))%>%
+  mutate(value = as.numeric(value))%>%
+  ggplot(., aes(x=preTRT, y=value, fill=preTRT)) +
+  geom_boxplot()+
+  facet_wrap(~features,nrow = 2,scales="free")+
+  theme(plot.title = element_text(color='black', hjust = 0.5),
+        panel.background = element_blank(),
+        panel.border = element_rect(color = "black", size = 1, fill = NA),
+        panel.grid = element_blank(),
+        axis.text = element_text(color='black'),
+        axis.title=element_blank(),
+        legend.position = "none")+
+  labs(title="(b) Molecular marker expression")
+ggarrange(cType,mMarker,nrow=2)
+```
+
+## Conclusions 
+Although previous clinical studies suggested that BRAFi/MEKi targeted therapy can improve immune microenvironment, which can potentially benefit ICB, our preliminary analysis suggests that there is no significant increase of TCF. Interestingly, patients with prior BRAFi/MEKi treatment have poorer response compared to the ones who didn’t either in CTLA4 or PD1 blockade therapy. 
+
+Preclinical studies have shown that the increased immunogenetic state can revert to an immunosuppressive state (e.g., few CD8+ T cells and NK cells infiltration, more double-negative T cells, restoration of myeloid-derived suppressor cells) once the resistance is developed to BRAFi. Consistent with clinical findings, the cytotoxic lymphocytes and NK cells are less effective in recognizing and killing BRAFi resistance cells []. Our results are consistent with those findings considering the patients who were in immunotherapy progressed faster if they received prior BRAFi/MEKi target therapy. Thus, even if the treatment initially transformed the immunogenic to a more active form, it reverted back to a suppressive state, which would lead to poor response in ICB. 
+\pagebreak
+
+## Methods 
+
+***Sample collection***: For hypothesis 1, whole-exome sequencing data (Bam_files) were collected from pretreatment biopsies before starting therapy, and resistance biopdy were obtained up discontinuation of BRAFi or MEKo at dies 
+
+***Purity and copy number determination***: To determine the purity and ploidy for each sample}. We are currently running samples in the CGA WES characterization Pipeline, a standard computational workflow Getz lab analysts employ when characterizing a tumor sample’s somatic variation through contrastive computational analysis of matched tumor-normal WES BAMs. Implemented ABSOLUTE from the pipeline will provide a report of sample purities and discrete copy number profiles. Once we receive the purity and ploidy of each sample, we will adjust our TCF for further analysis. 
+
+***ExTRECT TCF estimation***: We applied the ExTRECT method (R package TcellExTRECT V1.01) to estimate T cell fraction (TCF) for 45 patients with matched WES data (pre- and post- BRAF inhibitor treatment). In brief, ExTRECT borrowed the idea of estimating tumour ploidy using the log (base 2) of the read depth ratio at a specific genomic location. It estimated TCF by computing the read depth ratio between a sample with T cell content and one without T cell content in a single sample setting. Due to the incapabilities of identifying specific samples without any T cell content, this read depth ratio ($r_{\vdj}$) is approximated by the read depth ratio between V(D)J recombinant region and nearby region unaffected by V(D)J recombination. Base-level coverages extracted with Samtools within *TCRA* exon region of interest were subject to GC content normalization and a general additive model was used to smoothen the base-level $r_{\vdj}$ and the average $r_{\vdj}$ (across *TCRA* region impacted by VDJ recombination) was used to further estimate naive TCFs.
+
+Naive TCF(denoted as $f$) defined as:
+
+$$f = 1-2^{\frac{r_{\vdj}}{\gamma}}$$
+
+where $\gamma$ refers to a constant based on the sequencing platform (1 for Illumina Hiseq).
+
+With estimated tumour purity or copy number status, we could get a more accurate TCF through:
+
+$$f = (1 − p) + p\frac{\Psi_T}{2}-((1-p)+ p\frac{\Psi_T}{2})2^{\frac{r_{\vdj}}{\gamma}}$$
+
+where we have $p$ is the tumour purity.$\Psi_{T}$ as the copy number of the tumour around *TCRA* gene.
+
+***Immune infiltration from RNA-seq***: [Timer2](http://timer.comp-genomics.org/) web server was used to estimate immune infiltration from RNA-seq expression data with multiple existing algorithms which have been discussed and compared in details previously [@sturm2019comprehensive] [@li2020timer2]. Estimates based on xcell algorithm  was selected to perform the stratified comparison in Figure 4 mainly because of the detailed sub cell types the method is capable of providing. This may give better insights to dissect the potential bridging effect of immune microenvironment on ICB response for patients with prior MAPKi therapy.
+
+***Clinical and demographic characteristics***: All clinical characteristics and demographic information of cohort patients were obtained from supplementary materials in three referenced manuscripts [@van2014genetic] [@van2015genomic] [@liu2019integrative]. 
+
+***Survival Analysis***: We performed Kaplan Meier and cox proportional analysis with standard R package survival (version 3.2.3) and result visualizations with R package jskm (version 0.4.3).
+
+\pagebreak
+
+## Author contributions 
+
+Y.S. (TK) conceptualized the project, proposed the hypothesis and analysis plan, provided all unpublished data used in this analysis and estimated purity and copy number from WES. R.L. performed the TCF estimation, immune infiltration estimation based on RNA-seq data and conducted downstream analysis together with visualizations. All authors wrote and reviewed the project report.
+
+## Code availability 
+All code used to generate the results should be provided in a github repository.
+
+## Reference 
+
+
